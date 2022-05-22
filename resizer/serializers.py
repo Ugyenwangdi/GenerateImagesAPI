@@ -1,9 +1,9 @@
 from rest_framework.serializers import ModelSerializer 
-from .models import Image
+from .models import File
 
 class ImageSerializer(ModelSerializer):
     class Meta:
-        model = Image 
+        model = File 
         fields = '__all__'
         # fields = ('id', 'name', 'image', 'created')
 

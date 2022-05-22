@@ -1,13 +1,36 @@
+import os
 from django.shortcuts import render
+from django.conf import settings
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Image
+from .models import File
+from django.http import Http404, HttpResponse
 
 from .serializers import ImageSerializer
 
 
 # Create your views here.
+
+def base(request):
+    context = {
+        'file': File.objects.all()
+    }
+
+    return render(request, 'base.html', context)
+
+# def download(request, path):
+#     file_path = os.path.join(settings.MEDIA_ROOT,path)
+
+#     if os.path.exists(file_path):
+#         with open(file_path, 'rb') as fh:
+#             response = HttpResponse(fh.read(), content_type = "application/adminupload")
+#             response['Content-Disposition'] = 'inline;filename='+os.path.basename(file_path)
+#             return response
+
+
+#     return Http404
+
 
 @api_view(['GET'])
 def getRoutes(request):
@@ -30,43 +53,43 @@ def getRoutes(request):
     return Response(routes)
 
 @api_view(['GET'])
-def getImages(request):
-    image = Image.objects.all()
+def getFiles(request):
+    files = File.objects.all()
 
-    serializer = ImageSerializer(image, many=True)
+    serializer = ImageSerializer(files, many=True)
 
     return Response(serializer.data)
 
 @api_view(['GET'])
-def getImage(request, pk):
-    image = Image.objects.get(id=pk)
+def getFile(request, pk):
+    file = File.objects.get(id=pk)
 
-    serializer = ImageSerializer(image, many=False)
+    serializer = ImageSerializer(file, many=False)
 
     return Response(serializer.data)
 
 @api_view(['POST'])
-def resizeImage(request):
+def generateImages(request):
     data = request.data 
 
-    image = Image.objects.create(
+    file = File.objects.create(
         name = data['name'],
-        image = data['image']
+        video = data['video']
 
     )
 
-    serializer = ImageSerializer(image, many=False)
+    serializer = ImageSerializer(file, many=False)
 
     return Response(serializer.data)
 
 
 @api_view(['PUT'])
-def updateImage(request, pk):
+def updateFile(request, pk):
     data = request.data
 
-    image = Image.objects.get(id=pk)
+    file = File.objects.get(id=pk)
 
-    serializer = ImageSerializer(image, data=request.data)
+    serializer = ImageSerializer(file, data=request.data)
     
     if serializer.is_valid():
         serializer.save()
@@ -75,8 +98,8 @@ def updateImage(request, pk):
 
 
 @api_view(['DELETE'])
-def deleteImage(reqest, pk):
-   image = Image.objects.get(id=pk)
-   image.delete()
+def deleteFile(reqest, pk):
+   file = File.objects.get(id=pk)
+   file.delete()
    
    return Response('Image was deleted')

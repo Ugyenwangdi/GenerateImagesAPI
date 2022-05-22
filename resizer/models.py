@@ -1,9 +1,11 @@
 from django.db import models
 
 # Create your models here.
-class Image(models.Model):
-    name = models.TextField(max_length=50)
-    image = models.ImageField(null=True)
+class File(models.Model):
+    name = models.TextField(max_length=50, null=True)
+    # image = models.ImageField(null=True)
+    video = models.FileField(null=True)
+
     
     created = models.DateTimeField(auto_now_add=True)
 

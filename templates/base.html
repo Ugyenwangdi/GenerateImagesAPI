@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>downloader</title>
+</head>
+
+<body>
+    {% for post in file %}
+    <a href="{{post.video.url}}" download="{{post.video.url}}">Download</a> {% endfor %}
+</body>
+
+</html>
