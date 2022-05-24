@@ -9,8 +9,18 @@
 </head>
 
 <body>
-    {% for i in images %}
-    <a href="{{i.image.url}}" download="{{i.image.url}}">Download</a> {% endfor %}
+    <div style="background-color:#171a17; height: 100vh; text-align:center;padding:7px;">
+        <div style="background-color:#3c913c;width:50%; height: 100%; text-align:center;padding:2px;margin:0 auto">
+            <h3 style="font-size:2vw; color: white;">Click the download button</h3>
+            {% for i in images %}
+            <a href="{{i.image.url}}" download="{{i.image.url}}" style="padding: 4px; color: white;">Download</a> {% endfor %}
+        </div>
+    </div>
+
+    <div style="align-items: center;">
+
+    </div>
+
 </body>
 
 </html>
