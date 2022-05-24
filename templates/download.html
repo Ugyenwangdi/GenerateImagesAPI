@@ -9,8 +9,8 @@
 </head>
 
 <body>
-    {% for post in file %}
-    <a href="{{post.video.url}}" download="{{post.video.url}}">Download</a> {% endfor %}
+    {% for i in images %}
+    <a href="{{i.image.url}}" download="{{i.image.url}}">Download</a> {% endfor %}
 </body>
 
 </html>
