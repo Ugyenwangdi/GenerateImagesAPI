@@ -329,7 +329,7 @@ def generateImages(request):
             
             # writing the extracted images
 
-            if currentframe%1 == 0:
+            if currentframe%10 == 0:
                 #http://127.0.0.1:8000/media/0.jpg
                 cv2.imwrite(os.path.join(settings.MEDIA_ROOT, name), frame)  
 
